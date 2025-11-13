@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: quiz-chatbot-backend
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m spacy download en_core_web_sm
+      python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+    startCommand: uvicorn quiz_chatbot_backend:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
